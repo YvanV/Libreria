@@ -1,0 +1,74 @@
+{% extends "Ofertas/layouts/base.html" %}
+
+{% block content %}
+
+<div class="container" id="busca">
+
+    <div class="row">
+
+        <div class="col-sm-6">
+
+            <form action="/reporte_ofertas/" method="get">
+                {% include 'Ofertas/layouts/bs4_form.html' with form=form %}
+
+        </div>
+        
+        <div class="col-sm-1"></div>
+        
+        <div class="col-sm-4">
+            <input class="btn btn-primary btn-block mt-4" type="submit" value="Filtrar"/>
+        </div>
+        
+            </form>
+
+
+    </div>
+
+
+
+        <div class="row">
+
+            <div class="table-responsive">
+
+                <table class="table table-striped table-bordered table-sm">
+                    <thead class = "thead-dark">
+                        <tr>
+                            <th scope="col" style="text-align:center">#</th>
+                            <th scope="col" style="text-align:center">Título</th>
+                            <th scope="col" style="text-align:center">Autor</th>
+                            <th scope="col" style="text-align:center">Precio</th>
+                            <th scope="col" style="text-align:center">Estado</th>
+                            <th scope="col" style="text-align:center">Disponibilidad</th>
+                            <th scope="col" style="text-align:center">Ingreso</th>
+                            <th scope="col" style="text-align:center">Salida</th>
+                            <th scope="col" style="text-align:center">Ver</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for oferta in lista_ofertas %}
+                        <tr>
+                            <th scope = "row" style="text-align:center">{{ forloop.counter }}</th>
+                            <td style="text-align:left">{{ oferta.titulo }}</td>
+                            <td style="text-align:left">{{ oferta.autor }}</td>
+                            <td style="text-align:center" class="formato_precio">{{ oferta.precio_en_texto }}</td>
+                            <td >{{ oferta.estado }}</td>
+                            <td ><small class="formato_disponibilidad">{{ oferta.disponibilidad }}</small></td>
+                            <td style="text-align:center">{{ oferta.fecha_ingreso | date:'d/m/Y' }}</td>
+                            <td style="text-align:center">{{ oferta.fecha_salida | date:'d/m/Y'}}</td>
+                            <td style="text-align:center"><a target="_blank" href="{{ oferta.enlace }}" data-toggle="tooltip" title="Ver"><i class="bi bi-eye"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>    
+
+            </div>
+
+        </div>
+
+    
+</div>
+
+{% endblock %}
+
+
